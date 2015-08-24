@@ -1,0 +1,29 @@
+tr.group,
+tr.group:hover {
+    background-color: #1e9db1 !important;
+    color: white;
+}
+.group td:nth-child(2) {
+	text-align:right
+}
+.details-background {
+    background-color: #1e9db1 !important;
+    border-radius: 6px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+}
+h5 {
+    line-height: 1.7;
+}
+li.paginate_button:not(.active) a {
+    color: #1e9db1 !important;
+}
+.node-selected, li.paginate_button.active > a {
+    background-color: #1e9db1 !important;
+}
+
+.paginate_button a:focus {
+  outline: none;
+}
