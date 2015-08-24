@@ -4,7 +4,8 @@ tr.group:hover {
     color: white;
 }
 .group td:nth-child(2) {
-	text-align:right
+	text-align:right;
+	border-right:none !important;
 }
 .details-background {
     background-color: #1e9db1 !important;
