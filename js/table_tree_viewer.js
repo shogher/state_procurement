@@ -54,7 +54,6 @@ jQuery(document).ready(function($) {
                 sEmptyTable: 'Տվյալները բացակայում են',
                 sProcessing: 'Կատարվում է...',
                 sInfoThousands: ',',
-                sLengthMenu: 'Ցուցադրել _MENU_ արդյունքներ մեկ էջում',
                 sLoadingRecords: 'Բեռնվում է ...',
                 sZeroRecords: 'Հարցմանը համապատասխանող արդյունքներ չկան',
                 sInfo: 'Ցուցադրված են _START_-ից _END_ արդյունքները ընդհանուր _TOTAL_-ից',
@@ -62,12 +61,6 @@ jQuery(document).ready(function($) {
                 sInfoFiltered: '(ֆիլտրվել է ընդհանուր _MAX_ արդյունքներից)',
                 sInfoPostFix: '',
                 sSearch: 'Փնտրել',
-                oPaginate: {
-                    sFirst: 'Առաջին էջ',
-                    sPrevious: 'Նախորդ էջ',
-                    sNext: 'Հաջորդ էջ',
-                    sLast: 'Վերջին էջ'
-                },
                 oAria: {
                     sSortAscending: ': ակտիվացրեք աճման կարգով դասավորելու համար',
                     sSortDescending: ': ակտիվացրեք նվազման կարգով դասավորելու համար'
@@ -129,7 +122,7 @@ jQuery(document).ready(function($) {
                     if (last !== group) {
                         $(rows).eq(i).before(
                             '<tr class=\'group\'><td colspan=\'3\'>' + group +
-                            '<td colspan=\'2\'>' + formattedNumberView(amount) + '</td></td></tr>'
+                            '<td colspan=\'1\'>' + formattedNumberView(amount) + '<td colspan=\'1\'></td></td></td></tr>'
                         );
                         last = group;
                     }
