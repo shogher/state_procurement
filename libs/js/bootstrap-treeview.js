@@ -593,7 +593,7 @@
 			else {
 				// otherwise just text
 				treeItem
-					.append(node.text);
+					.append("<div>" + node.text + "</div>");
 			}
 
 			// Add tags as badges
@@ -689,13 +689,13 @@
 	Tree.prototype.template = {
 		list: '<ul class="list-group"></ul>',
 		item: '<li class="list-group-item"></li>',
-		indent: '<span class="indent"></span>',
-		icon: '<span class="icon"></span>',
+		indent: '<div class="indent"></div>',
+		icon: '<div class="icon"></div>',
 		link: '<a href="#" style="color:inherit;"></a>',
 		badge: '<span class="badge"></span>'
 	};
 
-	Tree.prototype.css = '.treeview .list-group-item{cursor:pointer}.treeview span.indent{margin-left:10px;margin-right:10px}.treeview span.icon{width:12px;margin-right:5px}.treeview .node-disabled{color:silver;cursor:not-allowed}'
+	Tree.prototype.css = '.treeview .list-group-item{cursor:pointer}.treeview div.indent{margin-left:10px;margin-right:10px}.treeview div.icon{width:12px;margin-right:5px}.treeview .node-disabled{color:silver;cursor:not-allowed}'
 
 
 	/**
