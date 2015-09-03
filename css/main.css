@@ -1,5 +1,5 @@
 h2 {
-	text-align:center;
+    text-align: center;
 }
 tr.group,
 tr.group:hover {
@@ -24,5 +24,5 @@ li.list-group-item.node-tree div:nth-child(4) {
     top: 12px;
 }
 .icon.node-icon {
-	width:0px;
+    width: 0px;
 }
