@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
     var table;
-    var numberView = function (input, decimalDelimiter, thousandDelimiter) {
+    var numberView = function(input, decimalDelimiter, thousandDelimiter) {
         var number, formatedNumber, decimalPart, module;
         number = parseFloat(input, 10);
         if (isNaN(number)) {
@@ -29,37 +29,14 @@ jQuery(document).ready(function($) {
         formatedNumber = number + thousandDelimiter + formatedNumber + decimalPart;
         return formatedNumber;
     };
-    var formattedNumberView = function (number) {
+    var formattedNumberView = function(number) {
         return numberView(number, '.', ',');
     };
-    var initTree = function (tree) {
-	var tree = [];
-	for (i in k) {
-	    if (k[i][1] === "") {
-		nodes = [];
-		for (j in k) {
-		    if (k[j][0] == k[i][0] && k[j][1] !== "" ) {
-			nodes.push({
-			    text: k[j][1]
-			})
-		    }
-		}
-	tmp = {text: k[i][0]};
-	if(nodes.length){
-		tmp.nodes =  nodes
-	}
-		tree.push(tmp)
-
-	    }
-	}
-
-        return tree;
-    };
-    function drawTable(tableData) {
+    var drawTable = function(tableData) {
         table = $('#example').DataTable({
             data: tableData,
             paging: false,
-			bFilter: false,
+            bFilter: false,
             language: {
                 decimal: '.',
                 thousands: ',',
@@ -86,15 +63,12 @@ jQuery(document).ready(function($) {
                 }
             },
             columns: [{
-                title: 'Պետական կառավարման մարմին'
-            }, {
-                title: ''
-            }, {
                 title: 'Գնման ենթակա  ապրանքներ, աշխատանքներ և ծառայություններ'
             }, {
                 title: 'Գնման առարկան'
             }, {
-                title: 'Չափման միավորը'
+                title: 'Չափման միավորը',
+				sClass: 'text-center'
             }, {
                 title: 'Ամբողջ քանակը (ծավալը)',
                 sClass: 'text-right'
@@ -109,81 +83,77 @@ jQuery(document).ready(function($) {
                 visible: false,
                 targets: 0
             }, {
-                visible: false,
+                visible: true,
                 targets: 1
             }, {
-                visible: false,
+                visible: true,
                 targets: 2
             }, {
                 visible: true,
-                targets: 3
-            }, {
-                visible: true,
-                targets: 4
-            }, {
-                visible: true,
-                targets: 5,
+                targets: 3,
                 render: formattedNumberView
             }, {
                 visible: true,
-                targets: 6,
+                targets: 4,
                 render: formattedNumberView
             }, {
                 visible: true,
-                targets: 7
+                targets: 5
             }],
             order: [
-                [2, 'asc']
+                [0, 'asc']
             ],
             displayLength: 25,
-            drawCallback: function (settings) {
+            drawCallback: function(settings) {
                 var api, rows, last, amount;
                 api = this.api();
                 rows = api.rows({
                     page: 'current'
                 }).nodes();
                 last = null;
-                api.column(2, {
+                api.column(0, {
                     page: 'current'
-                }).data().each(function (group, i) {
+                }).data().each(function(group, i) {
                     if (last !== group) {
                         $(rows).eq(i).before(
-                            '<tr class=\'group\'><td colspan=\'7\'>' + group +
-                           '</td></tr>'
+                            '<tr class=\'group\'><td colspan=\'5\'>' + group +
+                            '</td></tr>'
                         );
                         last = group;
                     }
                 });
             }
         });
-        $('#example tbody').on('click', 'tr.group', function () {
+        $('#example tbody').on('click', 'tr.group', function() {
             var currentOrder = table.order()[0];
-            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                table.order([2, 'desc']).draw();
+            if (currentOrder[0] === 0 && currentOrder[1] === 'asc') {
+                table.order([0, 'desc']).draw();
             } else {
-                table.order([2, 'asc']).draw();
+                table.order([0, 'asc']).draw();
             }
         });
     }
-    var tableData = dataSet.filter(function(el){return el[0] == "Արցախի ներդրումային հիմնադրամ"});
-    drawTable(tableData);
+    var tableData = dataSet[0].nodes;
+    drawTable(tableData[0].nodes);
     $('#tree').treeview({
-        data: initTree(tree),
+        data: tree,
         levels: 1,
         expandIcon: 'glyphicon glyphicon-triangle-right',
         collapseIcon: 'glyphicon glyphicon-triangle-bottom',
-	      onNodeSelected: function (event, data) {
+        onNodeSelected: function(event, data) {
             var item, nodes, nodesText, tmp;
-		tmp = dataSet.filter(function(el){return el[0] == data.text})
+            tmp = dataSet.filter(function(el) {
+                return el.parent == data.text
+            })
             if (tmp.length) {
                 table.destroy();
-        		$('#example tbody').remove();
-    		    drawTable(tmp);
-            } 
-       	}
+                $('#example tbody').remove();
+                drawTable(tmp[0].nodes);
+            }
+        }
     });
     $('#tree').treeview('selectNode', 0);
     $('#tree').treeview('expandNode', [0, {
         levels: 1
-}]);
+    }]);
 });
