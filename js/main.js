@@ -1,13 +1,14 @@
 jQuery(document).ready(function($) {
     var table;
     var numberView = function(input, decimalDelimiter, thousandDelimiter) {
-        var number, formatedNumber, decimalPart, module;
+        var number, formattedNumber, mathFloor, decimalPart, module;
         number = parseFloat(input, 10);
         if (isNaN(number)) {
             return input;
         }
-        formatedNumber = '';
-        decimalPart = decimalDelimiter + Math.floor((number - Math.floor(number)) * 10);
+        formattedNumber = '';
+        mathFloor = Math.floor((number - Math.floor(number)) * 10)
+        decimalPart = decimalDelimiter + mathFloor;
         number = number - (number % 1);
         if (number < 1000) {
             return number + decimalPart;
@@ -19,15 +20,16 @@ jQuery(document).ready(function($) {
             } else if (module >= 10 && module <= 99) {
                 module = '0' + module;
             }
-            if (formatedNumber) {
-                formatedNumber = thousandDelimiter + module + formatedNumber;
+            if (formattedNumber) {
+                formattedNumber = thousandDelimiter + module + formattedNumber;
             } else {
-                formatedNumber = module;
+                formattedNumber = module;
             }
             number = Math.floor(number / 1000);
         }
-        formatedNumber = number + thousandDelimiter + formatedNumber + decimalPart;
-        return formatedNumber;
+        formattedNumber = number + thousandDelimiter + formattedNumber +
+            decimalPart;
+        return formattedNumber;
     };
     var formattedNumberView = function(number) {
         return numberView(number, '.', ',');
@@ -46,20 +48,15 @@ jQuery(document).ready(function($) {
                 sLengthMenu: 'Ցուցադրել _MENU_ արդյունքներ մեկ էջում',
                 sLoadingRecords: 'Բեռնվում է ...',
                 sZeroRecords: 'Հարցմանը համապատասխանող արդյունքներ չկան',
-                sInfo: 'Ցուցադրված են _START_-ից _END_ արդյունքները ընդհանուր _TOTAL_-ից',
+                sInfo: 'Ցուցադրված են _START_-ից _END_ արդյունքները ' +
+                    'ընդհանուր _TOTAL_-ից',
                 sInfoEmpty: 'Արդյունքներ գտնված չեն',
-                sInfoFiltered: '(ֆիլտրվել է ընդհանուր _MAX_ արդյունքներից)',
                 sInfoPostFix: '',
-                sSearch: 'Փնտրել',
-                oPaginate: {
-                    sFirst: 'Առաջին էջ',
-                    sPrevious: 'Նախորդ էջ',
-                    sNext: 'Հաջորդ էջ',
-                    sLast: 'Վերջին էջ'
-                },
                 oAria: {
-                    sSortAscending: ': ակտիվացրեք աճման կարգով դասավորելու համար',
-                    sSortDescending: ': ակտիվացրեք նվազման կարգով դասավորելու համար'
+                    sSortAscending: ': ակտիվացրեք աճման կարգով դասավորելու ' +
+                        'համար',
+                    sSortDescending: ': ակտիվացրեք նվազման կարգով ' +
+                        'դասավորելու համար'
                 }
             },
             columns: [{
@@ -68,7 +65,7 @@ jQuery(document).ready(function($) {
                 title: 'Գնման առարկան'
             }, {
                 title: 'Չափման միավորը',
-				sClass: 'text-center'
+                sClass: 'text-center'
             }, {
                 title: 'Ամբողջ քանակը (ծավալը)',
                 sClass: 'text-right'
@@ -141,10 +138,10 @@ jQuery(document).ready(function($) {
         expandIcon: 'glyphicon glyphicon-triangle-right',
         collapseIcon: 'glyphicon glyphicon-triangle-bottom',
         onNodeSelected: function(event, data) {
-            var item, nodes, nodesText, tmp;
+            var tmp;
             tmp = dataSet.filter(function(el) {
                 return el.parent == data.text
-            })
+            });
             if (tmp.length) {
                 table.destroy();
                 $('#example tbody').remove();
