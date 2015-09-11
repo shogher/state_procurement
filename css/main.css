@@ -19,10 +19,6 @@ li.list-group-item.node-tree div:last-child {
   width: 90%;
 }
 
-li.list-group-item.node-tree div:nth-child(4) {
-  margin-left: 12px;
-}
-
 .icon.glyphicon {
   left: 15px;
   position: absolute;
@@ -31,4 +27,10 @@ li.list-group-item.node-tree div:nth-child(4) {
 
 .icon.node-icon {
   width: 0px;
+}
+
+#tree {
+  height: 1000px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
