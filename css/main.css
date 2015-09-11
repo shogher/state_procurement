@@ -30,7 +30,7 @@ li.list-group-item.node-tree div:last-child {
 }
 
 #tree {
-  height: 1000px;
+  height: 1025px;
   overflow: scroll;
   overflow-x: hidden;
 }
