@@ -146,6 +146,8 @@ jQuery(document).ready(function($) {
                 table.destroy();
                 $('#example tbody').remove();
                 drawTable(tmp[0].nodes);
+            } else {
+              $('#example tbody').empty();
             }
         }
     });
